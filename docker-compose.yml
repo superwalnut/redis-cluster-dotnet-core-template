@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  redis-master: # Setting up master node
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/redis:/bitnami # Redis master data volume
+      - ./data/redis/conf/redis.conf:/opt/bitnami/redis/conf/redis.conf # Redis master configuration volume
+
+  redis-replica:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6390-6399:6379'
+    depends_on:
+      - redis-master
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_MASTER_PORT_NUMBER=6379
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  redis-sentinel:
+    image: 'bitnami/redis-sentinel:latest'
+    environment:
+      - REDIS_MASTER_HOST=redis-master
+    ports: 
+      - '26379-26381:26379'
