@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+  api:
+    image: api
+    ports:
+      - '8088:80'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    depends_on:
+      - redis-master
+    build:
+      context: .
+      dockerfile: RedisClusterTemplate/DockerFile
+
   redis-master: # Setting up master node
     image: 'bitnami/redis:latest'
     ports:

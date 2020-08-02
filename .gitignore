@@ -1,1 +1,6 @@
 data/redis/redis/data
+RedisClusterTemplate/.vs
+RedisClusterTemplate/bin
+RedisClusterTemplate/obj
+.DS_Store
+*.code-workspace
