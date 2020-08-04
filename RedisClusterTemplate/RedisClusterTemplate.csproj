@@ -25,6 +25,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Services\" />
+    <Folder Include="Configs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="RedisClusterTemplate\**\*" Exclude="RedisClusterTemplate\**\bin\**;templates\**\obj\**" />

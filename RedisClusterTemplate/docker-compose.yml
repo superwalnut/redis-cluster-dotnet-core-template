@@ -12,7 +12,10 @@ services:
       - ASPNETCORE_HTTPS_PORT=8089
       - ASPNETCORE_Kestrel__Certificates__Default__Password=password
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-      - Redis=redis-master:6379
+      - Redis__0=redisclustertemplate_redis-master_1:6379
+      - Redis__1=redisclustertemplate_redis-replica_1:6379
+      - Redis__2=redisclustertemplate_redis-replica_2:6379
+      - Redis__3=redisclustertemplate_redis-replica_3:6379
     depends_on:
       - redis-master
     volumes:
@@ -39,7 +42,7 @@ services:
   redis-replica:
     image: 'bitnami/redis:latest'
     ports:
-      - '6390-6399:6379'
+      - '6380-6382:6379'
     depends_on:
       - redis-master
     networks:
@@ -49,6 +52,8 @@ services:
       - REDIS_MASTER_HOST=redis-master
       - REDIS_MASTER_PORT_NUMBER=6379
       - ALLOW_EMPTY_PASSWORD=yes
+    deploy:
+      replicas: 3
 
 networks:
   appnet:

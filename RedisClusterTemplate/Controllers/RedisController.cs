@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using RedisClusterTemplate.Models;
 using RedisClusterTemplate.Services;
 using ServiceStack.Redis;
@@ -12,9 +13,12 @@ namespace RedisClusterTemplate.Controllers
     {
         private readonly ICacheClient _cache;
 
-        public RedisController(ICacheClient cache)
+        private readonly IConfiguration _configuration;
+
+        public RedisController(ICacheClient cache, IConfiguration configuration)
         {
             _cache = cache;
+            _configuration = configuration;
         }
 
         [HttpGet("health")]
@@ -44,6 +48,12 @@ namespace RedisClusterTemplate.Controllers
             var result = _cache.Delete(key);
 
             return Ok(result);
+        }
+
+        [HttpGet("config")]
+        public IActionResult GetConfig()
+        {
+            return Ok(_configuration.GetSection("Redis").Get<string[]>());
         }
     }
 }

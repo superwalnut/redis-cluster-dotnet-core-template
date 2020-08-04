@@ -8,8 +8,9 @@ I am building a boilerplate project for a dotnet core api web service with redis
  docker stop $(docker ps -aq)
 
 # run command
-docker-compose up --detach --scale redis-master=1 --scale redis-replica=3 --scale redis-sentinel=3
+docker-compose up --detach --scale redis-master=1 --scale redis-replica=3
 
+docker-compose --compatibility up --build
 
 # pack the project template
 dotnet pack

@@ -27,9 +27,13 @@ namespace RedisClusterTemplate
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers();            
             services.AddSingleton<IRedisClientsManager>(c =>
-                new RedisManagerPool(Configuration.GetSection("Redis").Value));
+            {
+                var config = Configuration.GetSection("Redis").Get<string[]>();
+                return new RedisManagerPool(config);                
+            });
+            
             services.AddTransient<ICacheClient, RedisCacheClient>();
             services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
         }
