@@ -4,3 +4,5 @@ RedisClusterTemplate/bin
 RedisClusterTemplate/obj
 .DS_Store
 *.code-workspace
+RedisClusterTemplate/data
+*.pfx

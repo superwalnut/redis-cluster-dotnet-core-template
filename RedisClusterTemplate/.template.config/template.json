@@ -1,0 +1,13 @@
+{
+  "author": "superwalnut",
+  "name": "Redis .net Core Template",
+
+  "identity": "Superwalnut.RedisDotnetCoreTemplate",
+  "shortName": "redis-dotnet-core",
+  "classifications": ["Web"],
+  "tags": {
+    "language": "C#"
+  },
+
+  "sourceName": "RedisClusterTemplate"
+}

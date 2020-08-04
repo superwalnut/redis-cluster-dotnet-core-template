@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RedisClusterTemplate.Services;
 using ServiceStack.Redis;
 
 namespace RedisClusterTemplate
@@ -29,6 +30,8 @@ namespace RedisClusterTemplate
             services.AddControllers();
             services.AddSingleton<IRedisClientsManager>(c =>
                 new RedisManagerPool(Configuration.GetSection("Redis").Value));
+            services.AddTransient<ICacheClient, RedisCacheClient>();
+            services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

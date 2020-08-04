@@ -5,18 +5,30 @@ services:
     image: api
     ports:
       - '8088:80'
+      - '8089:443'
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=8089
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - Redis=redis-master:6379
     depends_on:
       - redis-master
+    volumes:
+      - ${HOME}/.aspnet/https:/https/
+    networks:
+      - appnet
     build:
       context: .
-      dockerfile: RedisClusterTemplate/DockerFile
+      dockerfile: DockerFile
 
   redis-master: # Setting up master node
     image: 'bitnami/redis:latest'
     ports:
       - '6379:6379'
+    networks:
+      - appnet
     environment:
       - REDIS_REPLICATION_MODE=master
       - ALLOW_EMPTY_PASSWORD=yes
@@ -30,15 +42,14 @@ services:
       - '6390-6399:6379'
     depends_on:
       - redis-master
+    networks:
+      - appnet
     environment:
       - REDIS_REPLICATION_MODE=slave
       - REDIS_MASTER_HOST=redis-master
       - REDIS_MASTER_PORT_NUMBER=6379
       - ALLOW_EMPTY_PASSWORD=yes
 
-  redis-sentinel:
-    image: 'bitnami/redis-sentinel:latest'
-    environment:
-      - REDIS_MASTER_HOST=redis-master
-    ports: 
-      - '26379-26381:26379'
+networks:
+  appnet:
+    driver: bridge

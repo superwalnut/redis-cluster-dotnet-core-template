@@ -1,14 +1,32 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.1</PackageVersion>
+    <PackageId>Superwalnut.RedisClusterTemplate</PackageId>
+    <Title>Redis Cluster Templates</Title>
+    <Authors>Superwalnut</Authors>
+    <Description>This project template enables working with pre setup redis cluser running in docker and consumed by a dotnet core web api application. Features:
+            - running redis cluster in docker using docker-compose, and can be scaled by n-number of master and slaves.
+            - dotnet core web api application template that uses servicestack redis client to consume redis cache.</Description>
+    <PackageTags>dotnet-new;templates;redis</PackageTags>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
-
-
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>        
+  </PropertyGroup>  
   <ItemGroup>
     <PackageReference Include="ServiceStack.Redis" Version="5.9.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="RedisClusterTemplate\**\*" Exclude="RedisClusterTemplate\**\bin\**;templates\**\obj\**" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using RedisClusterTemplate.Models;
+using RedisClusterTemplate.Services;
 using ServiceStack.Redis;
 
 namespace RedisClusterTemplate.Controllers
@@ -9,11 +10,11 @@ namespace RedisClusterTemplate.Controllers
     [ApiController]
     public class RedisController : Controller
     {
-        private readonly IRedisClientsManager _redisClientsManager;
+        private readonly ICacheClient _cache;
 
-        public RedisController(IRedisClientsManager redisClientsManager)
+        public RedisController(ICacheClient cache)
         {
-            _redisClientsManager = redisClientsManager;
+            _cache = cache;
         }
 
         [HttpGet("health")]
@@ -25,35 +26,24 @@ namespace RedisClusterTemplate.Controllers
         [HttpGet("get/{key}")]
         public IActionResult GetCachedItem(string key)
         {
-            using (IRedisClient redis = _redisClientsManager.GetClient())
-            {
-                var cached = redis.As<CachedItem>();
-                var result = cached.GetById(key);
-
-                if (result == null)
-                {
-                    return Ok("Not Found");
-                }
-
-                return Ok(result);
-            }
+            var result = _cache.Get<CachedItem>(key);
+            return Ok(result);
         }
 
-        [HttpPost("set/{key}/{val}")]
-        public IActionResult SetCachedItem(string key, string val)
+        [HttpPost("set/{key}")]
+        public IActionResult SetCachedItem(string key, [FromBody]CachedItem item)
         {
-            using (IRedisClient redis = _redisClientsManager.GetClient())
-            {
-                var cached = redis.As<CachedItem>();
+            var result = _cache.Set<CachedItem>(key, item);
 
-                cached.Store(new CachedItem
-                {
-                    Id = key,
-                    Value = val
-                });
+            return Ok(result);
+        }
 
-                return Ok("Success");
-            }
+        [HttpDelete("delete/{key}")]
+        public IActionResult DeleteCachedItem(string key)
+        {
+            var result = _cache.Delete(key);
+
+            return Ok(result);
         }
     }
 }
