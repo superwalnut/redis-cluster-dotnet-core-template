@@ -1,6 +1,6 @@
 {
   "author": "superwalnut",
-  "name": "Redis .net Core Template",
+  "name": "Redis .Net Core Template",
 
   "identity": "Superwalnut.RedisDotnetCoreTemplate",
   "shortName": "redis-dotnet-core",

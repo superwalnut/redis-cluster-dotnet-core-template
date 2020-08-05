@@ -1,0 +1,60 @@
+version: '3.7'
+
+services:
+  api:
+    image: api
+    ports:
+      - '8088:80'
+      - '8089:443'
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+;http://+
+      - ASPNETCORE_HTTPS_PORT=8089
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - Redis__0=docker_redis-master_1:6379
+      - Redis__1=docker_redis-replica_1:6379
+      - Redis__2=docker_redis-replica_2:6379
+      - Redis__3=docker_redis-replica_3:6379
+    depends_on:
+      - redis-master
+    volumes:
+      - ${HOME}/.aspnet/https:/https/
+    networks:
+      - appnet
+    build:
+      context: ..
+      dockerfile: ./DockerFile
+
+  redis-master: # Setting up master node
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6379:6379'
+    networks:
+      - appnet
+    environment:
+      - REDIS_REPLICATION_MODE=master
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - ./data/redis:/bitnami # Redis master data volume
+      - ./data/redis/conf/redis.conf:/opt/bitnami/redis/conf/redis.conf # Redis master configuration volume
+
+  redis-replica:
+    image: 'bitnami/redis:latest'
+    ports:
+      - '6380-6382:6379'
+    depends_on:
+      - redis-master
+    networks:
+      - appnet
+    environment:
+      - REDIS_REPLICATION_MODE=slave
+      - REDIS_MASTER_HOST=redis-master
+      - REDIS_MASTER_PORT_NUMBER=6379
+      - ALLOW_EMPTY_PASSWORD=yes
+    deploy:
+      replicas: 3
+
+networks:
+  appnet:
+    driver: bridge

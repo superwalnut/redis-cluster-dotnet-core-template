@@ -6,3 +6,7 @@ RedisClusterTemplate/obj
 *.code-workspace
 RedisClusterTemplate/data
 *.pfx
+TemplateProject/bin
+TemplateProject/obj
+TemplateProject/.vs
+TemplateProject/Properties/launchSettings.json
