@@ -5,18 +5,19 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 
     <PackageType>Template</PackageType>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <PackageId>Superwalnut.RedisClusterTemplate</PackageId>
-    <Title>Redis Cluster Templates</Title>
+    <Title>Redis Cluster Docker Templates</Title>
     <Authors>Superwalnut</Authors>
-    <Description>This project template enables working with pre setup redis cluser running in docker and consumed by a dotnet core web api application. Features:
-            - running redis cluster in docker using docker-compose, and can be scaled by n-number of master and slaves.
-            - dotnet core web api application template that uses servicestack redis client to consume redis cache.</Description>
+    <Description>This is a project template for redis cluster+docker+dotnet core api. It saves your time create redis cluster in docker from scratch and also includes a generic cache client.  
+            all you need to do is using docker-compose up and you already have 1 master with 3 slaves redis cluster.</Description>
     <PackageTags>dotnet-new;templates;redis</PackageTags>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IncludeContentInPack>true</IncludeContentInPack>
     <IncludeBuildOutput>false</IncludeBuildOutput>
-    <ContentTargetFolders>content</ContentTargetFolders>        
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/superwalnut/redis-cluster-dotnet-core-template</PackageProjectUrl>
   </PropertyGroup>  
   <ItemGroup>
     <PackageReference Include="ServiceStack.Redis" Version="5.9.0" />
@@ -26,6 +27,7 @@
     <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Configs\" />
+    <None Include="licenses\LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
   </ItemGroup>
   <ItemGroup>
     <Content Include="RedisClusterTemplate\**\*" Exclude="RedisClusterTemplate\**\bin\**;templates\**\obj\**" />
