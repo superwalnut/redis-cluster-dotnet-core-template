@@ -2,6 +2,8 @@
 
 > This is a project template that saves your time create redis cluster in docker with a dotnet core app to consume from scratch. All you need to do is using docker-compose up and you already have 1 master + 3 slaves redis cluster.
 
+Read full medium article https://medium.com/@mrkevin.wang/create-redis-cluster-docker-net-core-3-1-api-for-distributed-caching-ff0ba1673231
+
 **Pre-request**
 
 - Redis [Bitnami Redis](https://github.com/bitnami/bitnami-docker-redis)
