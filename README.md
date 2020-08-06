@@ -2,12 +2,12 @@
 
 > This is a project template that saves your time create redis cluster in docker with a dotnet core app to consume from scratch. All you need to do is using docker-compose up and you already have 1 master + 3 slaves redis cluster.
 
-**Languages & Tools**
+**Pre-request**
 
 - Redis [Bitnami Redis](https://github.com/bitnami/bitnami-docker-redis)
 - Docker
-- .Net Core 3.1
-- ServiceStack.Redis
+- .Net Core 3.1 ([.Net Core 3.1 sdk - docker](https://hub.docker.com/_/microsoft-dotnet-core-sdk))
+- [ServiceStack.Redis](https://github.com/ServiceStack/ServiceStack.Redis)
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ $ dotnet new redis-dotnet-core -n RedisDemo -o RedisDemo
 
 This creates a project in folder `RedisDemo`
 
-![Redis Demo](images/dotnet-demo.png)
+![Redis Demo](images/redis-demo.png)
 
 ---
 
