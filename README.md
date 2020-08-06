@@ -4,38 +4,18 @@
 
 **Languages & Tools**
 
-- Redis
+- Redis [Bitnami Redis](https://github.com/bitnami/bitnami-docker-redis)
 - Docker
 - .Net Core 3.1
 - ServiceStack.Redis
 
 ## Table of Contents
 
-- [Installation](#installation)
 - [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Support Me](#support)
 - [License](#license)
-
----
-
-## Installation
-
-- Using `dotnet new -i <package>` to install the project template from nuget
-
-[Superwalnut.RedisClusterTemplate](https://www.nuget.org/packages/Superwalnut.RedisClusterTemplate)
-
-```shell
-$ dotnet new -i Superwalnut.RedisClusterTemplate
-```
-
-- Using `dotnet new redis-dotnet-core -n <your-project-name>` to create a project with your own project name using this template
-
-```shell
-$ dotnet new redis-dotnet-core -n MyFirstRedisProject -o MyFirstRedisProject
-```
 
 ---
 
@@ -45,6 +25,30 @@ $ dotnet new redis-dotnet-core -n MyFirstRedisProject -o MyFirstRedisProject
 - Run .net core web API in docker
 - Built in generic cache client using ServiceStack.Redis nuget package
 - Easy to scale redis with n-masters & n-slaves in docker
+
+---
+
+## Installation
+
+- Using `dotnet new -i <package>` to install the project template from nuget [Superwalnut.RedisClusterTemplate](https://www.nuget.org/packages/Superwalnut.RedisClusterTemplate)
+
+```shell
+$ dotnet new -i Superwalnut.RedisClusterTemplate
+```
+
+You should see 'Redis .Net Core Template' in your template list by `dotnet new -l`
+
+![Redis .net core Template Screenshot](images/dotnet-new-l.png)
+
+- Using `dotnet new redis-dotnet-core -n <your-project-name>` to create a project with your own project name using this template
+
+```shell
+$ dotnet new redis-dotnet-core -n RedisDemo -o RedisDemo
+```
+
+This creates a project in folder `RedisDemo`
+
+![Redis Demo](images/dotnet-demo.png)
 
 ---
 
@@ -66,7 +70,7 @@ $ docker-compose up --build
 $ docker-compose --compatibility up --build
 ```
 
-- Advanced - n-Master + n-Slaves + n-api
+- Advanced - n-Master + n-Slaves + api
 
 > To run n number of masters and slaves, you will need to configure the connection strings.
 
@@ -78,24 +82,19 @@ $ docker-compose --compatibility up --build
 
 ---
 
-## FAQ
-
-- **How do I do *specifically* so and so?**
-    - TODO
-
----
-
 ## Support
 
 Reach out to me at one of the following places!
 
-- TODO
+- [Follow me @ Github](https://github.com/superwalnut)
+
+- [Twitter](https://twitter.com/superwalnuts)
 
 ---
 
-## Donations (Optional)
+## Support Me
 
-- TODO
+-  [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z61I9HB)
 
 ---
 
@@ -108,8 +107,6 @@ Reach out to me at one of the following places!
 -------
 
 ## Reference
-
-[Bitnami Redis](https://github.com/bitnami/bitnami-docker-redis)
 
 - docker stop all
 
@@ -124,9 +121,7 @@ docker-compose --compatibility up --build -p redis
 - pack the project template
 dotnet pack
 
-- to <GeneratePackageOnBuild>true</GeneratePackageOnBuild>   
 dotnet build -c Release
-
 
 - install template
 
@@ -135,8 +130,6 @@ dotnet new -i <package>
 - create project
 
 dotnet new redis-dotnet-core -n MyProject --force
-
-
 
 - stop docker 
 docker ps -q | xargs -L1 docker stop
