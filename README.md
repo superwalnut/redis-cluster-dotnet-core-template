@@ -21,10 +21,13 @@
 
 ## Features
 
-- Run redis cluster in docker
-- Run .net core web API in docker
-- Built in generic cache client using ServiceStack.Redis nuget package
+> This is a development project template, it is NOT production ready. It only kickstarting your project so that you don't need to build from scratch.
+
+- Pre-built and configured redis cluster in docker
+- Pre-built a sample web API in .net core 3.1
+- The sample web API is built with DockerFile and runs in docker
 - Easy to scale redis with n-masters & n-slaves in docker
+- Built in generic cache client using ServiceStack.Redis
 
 ---
 
@@ -64,7 +67,12 @@ $ docker-compose up --build
 
 - Swarm Mode - 1 master + 3 slaves + 1 api
 
-> Run `docker-compose` with compatibility mode, it will apply `deploy` to run docker swarm mode 
+> Run `docker-compose` with compatibility mode, it will apply preset `deploy` to run docker swarm mode 
+
+```json
+    deploy:
+      replicas: 3
+```
 
 ```shell
 $ docker-compose --compatibility up --build
@@ -72,7 +80,23 @@ $ docker-compose --compatibility up --build
 
 - Advanced - n-Master + n-Slaves + api
 
-> To run n number of masters and slaves, you will need to configure the connection strings.
+> To run n number of masters and slaves, you will need to configure a couple of things in `docker-compose.yml`
+
+    - Configure connection strings in api container, add n-number of master and n-number of slaves connection strings
+
+    ```yaml
+        - Redis__0=docker_redis-master_1:6379
+        - Redis__1=docker_redis-replica_1:6379
+        - Redis__2=docker_redis-replica_2:6379
+        - Redis__3=docker_redis-replica_3:6379
+    ```
+
+    - Add or configure `deploy` section to the number you wanted
+
+    ```yaml
+        deploy:
+      replicas: 3
+    ```
 
 ---
 
