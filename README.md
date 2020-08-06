@@ -14,7 +14,7 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Support Me](#support)
+- [Support](#support)
 - [License](#license)
 
 ---
@@ -82,21 +82,21 @@ $ docker-compose --compatibility up --build
 
 > To run n number of masters and slaves, you will need to configure a couple of things in `docker-compose.yml`
 
-    - Configure connection strings in api container, add n-number of master and n-number of slaves connection strings
+Configure connection strings in api container, add n-number of master and n-number of slaves connection strings
 
-    ```yaml
-        - Redis__0=docker_redis-master_1:6379
-        - Redis__1=docker_redis-replica_1:6379
-        - Redis__2=docker_redis-replica_2:6379
-        - Redis__3=docker_redis-replica_3:6379
-    ```
+```json
+    - Redis__0=docker_redis-master_1:6379
+    - Redis__1=docker_redis-replica_1:6379
+    - Redis__2=docker_redis-replica_2:6379
+    - Redis__3=docker_redis-replica_3:6379
+```
 
-    - Add or configure `deploy` section to the number you wanted
+Add or configure `deploy` section to the number you wanted
 
-    ```yaml
-        deploy:
-      replicas: 3
-    ```
+```json
+    deploy:
+    replicas: 3
+```
 
 ---
 
@@ -114,11 +114,7 @@ Reach out to me at one of the following places!
 
 - [Twitter](https://twitter.com/superwalnuts)
 
----
-
-## Support Me
-
--  [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z61I9HB)
+- [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Z8Z61I9HB)
 
 ---
 
