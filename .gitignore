@@ -11,3 +11,4 @@ TemplateProject/obj
 TemplateProject/.vs
 TemplateProject/Properties/launchSettings.json
 RedisDemo/docker/data
+TemplateProject/output
