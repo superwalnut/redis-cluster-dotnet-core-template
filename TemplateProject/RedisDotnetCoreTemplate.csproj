@@ -8,6 +8,7 @@
     <PackageId>Superwalnut.RedisClusterTemplate</PackageId>
     <Title>Redis Cluster Docker Templates</Title>
     <Authors>Superwalnut</Authors>
+    <PackageIcon>icon-48.png</PackageIcon>
     <Description>
     This is a project template for Redis Cluster + Docker + .Net Core 3.1 API,
     using `dotnet new -i Superwalnut.RedisClusterTemplate` to install project as a template,
@@ -25,6 +26,9 @@
   <ItemGroup>
     <PackageReference Include="ServiceStack.Redis" Version="5.9.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icon-48.png" Pack="true" PackagePath=""/>
   </ItemGroup>
   <ItemGroup>
      <None Include="LICENSE.txt" Pack="true" PackagePath="$(PackageLicenseFile)"/>
