@@ -28,4 +28,4 @@ jobs:
       run: dotnet pack -o ./output -c Release /p:Version=1.0.${{github.run_id}}
     - name: Push Nuget
       working-directory: ./TemplateProject
-      run: dotnet nuget push /output/Superwalnut.RedisClusterTemplate.1.0.${{github.run_id}}.nupkg -k oy2ocdeouzavgv5sklxa6ccntqgmfmwuborj67o5wnj4hy -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./output/Superwalnut.RedisClusterTemplate.1.0.${{github.run_id}}.nupkg -k oy2ocdeouzavgv5sklxa6ccntqgmfmwuborj67o5wnj4hy -s https://api.nuget.org/v3/index.json
