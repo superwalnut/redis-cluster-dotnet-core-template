@@ -20,6 +20,6 @@ jobs:
     - name: Goto Tempalte Project folder
       run: cd TemplateProject
     - name: Install dependencies
-      run: dotnet restore RedisDotnetCoreTemplate.csproj
+      run: dotnet restore
     - name: Build
-      run: dotnet build RedisDotnetCoreTemplate.csproj --configuration Release --no-restore    
+      run: dotnet build --configuration Release --no-restore    
